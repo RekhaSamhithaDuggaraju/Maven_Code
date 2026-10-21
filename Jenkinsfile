@@ -1,15 +1,22 @@
+
 pipeline {
     agent any
+
+    environment {
+        JAVA_HOME = '/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home'
+        PATH = '/opt/homebrew/bin:/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin:/usr/bin:/bin:/usr/sbin:/sbin'
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                echo 'Source code checked out from GitHub.'
             }
         }
+
         stage('Build and Test') {
             steps {
-                sh 'mvn clean test'
+                sh '/opt/homebrew/bin/mvn clean test'
             }
         }
     }
